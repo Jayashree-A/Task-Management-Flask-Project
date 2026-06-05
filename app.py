@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
@@ -18,11 +19,13 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
+
 # MODELS
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
+
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -33,16 +36,19 @@ class Task(db.Model):
     status = db.Column(db.String(50), default="Pending")
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# ROUTES
+
+# HOME
 @app.route('/')
 def index():
     return render_template("index.html")
 
-# REGISTER (HASHED PASSWORD)
+
+# REGISTER
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -55,8 +61,8 @@ def register():
 
         hashed_pw = bcrypt.generate_password_hash(password).decode('utf-8')
 
-        user = User(username=username, password=hashed_pw)
-        db.session.add(user)
+        new_user = User(username=username, password=hashed_pw)
+        db.session.add(new_user)
         db.session.commit()
 
         flash("Account created successfully!")
@@ -64,7 +70,8 @@ def register():
 
     return render_template("register.html")
 
-# LOGIN (CHECK HASH)
+
+# LOGIN
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -79,16 +86,19 @@ def login():
             return redirect(url_for('dashboard'))
 
         flash("Invalid credentials!")
-        return redirect(url_for('login'))
+        return render_template("login.html")
 
     return render_template("login.html")
 
+
+# LOGOUT
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash("Logged out!")
     return redirect(url_for('index'))
+
 
 # DASHBOARD
 @app.route('/dashboard')
@@ -103,6 +113,7 @@ def dashboard():
         completed_tasks=len([t for t in tasks if t.status == "Completed"]),
         pending_tasks=len([t for t in tasks if t.status == "Pending"])
     )
+
 
 # ADD TASK
 @app.route('/add-task', methods=['POST'])
@@ -125,6 +136,7 @@ def add_task():
     flash("Task added!")
     return redirect(url_for('dashboard'))
 
+
 # COMPLETE TASK
 @app.route('/complete/<int:task_id>')
 @login_required
@@ -137,7 +149,8 @@ def complete_task(task_id):
 
     return redirect(url_for('dashboard'))
 
-# 🆕 EDIT TASK (NEW FEATURE)
+
+# EDIT TASK
 @app.route('/edit/<int:task_id>', methods=['GET', 'POST'])
 @login_required
 def edit_task(task_id):
@@ -157,6 +170,7 @@ def edit_task(task_id):
 
     return render_template("edit_task.html", task=task)
 
+
 # DELETE TASK
 @app.route('/delete/<int:task_id>')
 @login_required
@@ -167,11 +181,14 @@ def delete_task(task_id):
         db.session.delete(task)
         db.session.commit()
 
+    flash("Task deleted!")
     return redirect(url_for('dashboard'))
 
-# DB CREATE
+
+# RUN
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
 
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

@@ -1,34 +1,15 @@
-/* =========================
-   GLOBAL STYLES
-========================= */
-
 body {
-    background: #f5f7fb;
+    background: linear-gradient(135deg, #f5f7fb, #eef2ff);
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* =========================
-   HERO SECTION (INDEX PAGE)
-========================= */
-
+/* HERO */
 .hero-section {
     margin-top: 80px;
     padding: 60px 20px;
 }
 
-.hero-section h1 {
-    color: #222;
-    letter-spacing: 1px;
-}
-
-.hero-section p {
-    color: #555;
-}
-
-/* =========================
-   CARDS
-========================= */
-
+/* CARDS */
 .card {
     border: none;
     border-radius: 15px;
@@ -40,50 +21,16 @@ body {
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* =========================
-   STATS CARDS
-========================= */
-
-.stats-card {
-    text-align: center;
-    border-radius: 15px;
-}
-
-.stats-card h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-.stats-card p {
-    margin: 0;
-    font-size: 1rem;
-}
-
-/* =========================
-   TASK CARDS
-========================= */
-
+/* TASK CARDS */
 .task-card {
     transition: 0.3s ease;
 }
 
-.task-card .card {
-    background: white;
-    border-radius: 15px;
+.task-card:hover {
+    transform: translateY(-5px);
 }
 
-.task-card h4 {
-    color: #333;
-}
-
-.task-card p {
-    color: #555;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
+/* BUTTONS */
 .btn {
     border-radius: 10px;
     font-weight: 500;
@@ -116,10 +63,7 @@ body {
     background: #b91c1c;
 }
 
-/* =========================
-   INPUT FIELDS
-========================= */
-
+/* INPUTS */
 input, textarea, select {
     border-radius: 10px !important;
     padding: 10px !important;
@@ -134,38 +78,21 @@ select:focus {
     box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25) !important;
 }
 
-/* =========================
-   SEARCH BOX
-========================= */
-
+/* SEARCH */
 #searchInput {
     border-radius: 12px;
     padding: 12px;
     font-size: 16px;
 }
 
-/* =========================
-   BADGES
-========================= */
-
+/* BADGES */
 .badge {
     font-size: 0.9rem;
     padding: 6px 10px;
     border-radius: 8px;
 }
 
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar {
-    padding: 15px 20px;
-}
-
-/* =========================
-   ANIMATION
-========================= */
-
+/* ANIMATION */
 @keyframes fadeIn {
     from {
         opacity: 0;

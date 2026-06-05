@@ -3,34 +3,31 @@
 {% block content %}
 
 <div class="row justify-content-center">
-    <div class="col-md-5">
 
-        <div class="card shadow-lg p-4">
+<div class="col-md-5">
 
-            <h2 class="text-center mb-4">Register</h2>
+<div class="card p-4">
 
-            <form method="POST">
+<h3 class="text-center">Register</h3>
 
-                <input type="text" name="username" class="form-control mb-3"
-                       placeholder="Enter Username" required>
+<form method="POST">
 
-                <input type="password" name="password" class="form-control mb-3"
-                       placeholder="Enter Password" required>
+<input type="text" name="username" class="form-control mb-2" placeholder="Username" required>
 
-                <button class="btn btn-success w-100">
-                    Register
-                </button>
+<input type="password" name="password" class="form-control mb-2" placeholder="Password" required>
 
-            </form>
+<button class="btn btn-success w-100">Register</button>
 
-            <p class="text-center mt-3">
-                Already have an account?
-                <a href="{{ url_for('login') }}">Login</a>
-            </p>
+</form>
 
-        </div>
+<p class="text-center mt-3">
+    Already have account? <a href="/login">Login</a>
+</p>
 
-    </div>
+</div>
+
+</div>
+
 </div>
 
 {% endblock %}

@@ -3,34 +3,56 @@
 {% block content %}
 
 <div class="row justify-content-center">
+
 <div class="col-md-6">
 
-<div class="card p-4 shadow-lg">
+<div class="card p-4">
 
-<h3>Edit Task</h3>
+<h3 class="mb-3 text-center">Edit Task</h3>
 
 <form method="POST">
 
-<input class="form-control mb-3" name="title"
-value="{{ task.title }}">
+<!-- TITLE -->
+<input type="text"
+       name="title"
+       class="form-control mb-3"
+       value="{{ task.title }}"
+       required>
 
-<textarea class="form-control mb-3" name="description">
-{{ task.description }}
-</textarea>
+<!-- DESCRIPTION -->
+<textarea name="description"
+          class="form-control mb-3"
+          rows="4"
+          placeholder="Description">{{ task.description }}</textarea>
 
-<select class="form-control mb-3" name="priority">
-<option {{ 'selected' if task.priority=='High' }}>High</option>
-<option {{ 'selected' if task.priority=='Medium' }}>Medium</option>
-<option {{ 'selected' if task.priority=='Low' }}>Low</option>
+<!-- PRIORITY -->
+<select name="priority" class="form-control mb-3">
+
+    <option value="High" {% if task.priority == "High" %}selected{% endif %}>
+        High
+    </option>
+
+    <option value="Medium" {% if task.priority == "Medium" %}selected{% endif %}>
+        Medium
+    </option>
+
+    <option value="Low" {% if task.priority == "Low" %}selected{% endif %}>
+        Low
+    </option>
+
 </select>
 
-<button class="btn btn-primary">Update Task</button>
+<!-- BUTTON -->
+<button class="btn btn-primary w-100">
+    Update Task
+</button>
 
 </form>
 
 </div>
 
 </div>
+
 </div>
 
 {% endblock %}

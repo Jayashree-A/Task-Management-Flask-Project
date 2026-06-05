@@ -1,31 +1,36 @@
 # 📝 Advanced Task Manager (Flask)
 
-A simple but powerful Task Management web app built using Flask, SQLite, and Bootstrap.
+A simple yet powerful Task Management web application built using **Flask, SQLite, and Bootstrap**.  
+It allows users to manage daily tasks efficiently with authentication and a clean dashboard UI.
 
 ---
 
 ## 🚀 Features
 
-- User Registration & Login
-- Add / Delete / Complete Tasks
-- Task Priority (High / Medium / Low)
-- Due Date Support
-- User-specific tasks
-- Dashboard with statistics
-- Search tasks (frontend JS)
-- Clean Bootstrap UI
+- 🔐 User Registration & Login (secure authentication)
+- ➕ Add new tasks
+- 🗑️ Delete tasks
+- ✅ Mark tasks as completed
+- 📅 Due date support
+- ⚡ Task priority levels (High / Medium / Low)
+- 👤 User-specific task management
+- 📊 Dashboard with task statistics
+- 🔍 Search functionality (frontend JS)
+- 🎨 Responsive UI using Bootstrap 5
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Python
-- Flask
-- SQLite (Database)
-- Flask-Login
-- Flask-SQLAlchemy
-- HTML, CSS, JavaScript
-- Bootstrap 5
+- Python 🐍
+- Flask 🌐
+- SQLite 🗄️
+- Flask-Login 🔐
+- Flask-SQLAlchemy ⚙️
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap 5 🎨
 
 ---
 

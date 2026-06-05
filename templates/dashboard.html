@@ -2,122 +2,75 @@
 
 {% block content %}
 
-<h1 class="mb-4 fw-bold">Dashboard</h1>
+<h2 class="mb-4">Dashboard</h2>
 
-<!-- STATS -->
 <div class="row mb-4">
 
-    <div class="col-md-4 mb-3">
-        <div class="card bg-primary text-white p-4 shadow-lg">
-            <h2>{{ total_tasks }}</h2>
+    <div class="col-md-4">
+        <div class="card bg-primary text-white p-3">
+            <h3>{{ total_tasks }}</h3>
             <p>Total Tasks</p>
         </div>
     </div>
 
-    <div class="col-md-4 mb-3">
-        <div class="card bg-success text-white p-4 shadow-lg">
-            <h2>{{ completed_tasks }}</h2>
-            <p>Completed Tasks</p>
+    <div class="col-md-4">
+        <div class="card bg-success text-white p-3">
+            <h3>{{ completed_tasks }}</h3>
+            <p>Completed</p>
         </div>
     </div>
 
-    <div class="col-md-4 mb-3">
-        <div class="card bg-warning text-dark p-4 shadow-lg">
-            <h2>{{ pending_tasks }}</h2>
-            <p>Pending Tasks</p>
+    <div class="col-md-4">
+        <div class="card bg-warning text-dark p-3">
+            <h3>{{ pending_tasks }}</h3>
+            <p>Pending</p>
         </div>
     </div>
 
 </div>
 
 <!-- ADD TASK -->
-<div class="card shadow-lg p-4 mb-5">
+<div class="card p-4 mb-4">
 
-    <h3 class="mb-4">Add New Task</h3>
+<h4>Add Task</h4>
 
-    <form method="POST" action="{{ url_for('add_task') }}">
+<form method="POST" action="/add-task">
 
-        <input type="text" name="title" class="form-control mb-3"
-               placeholder="Task Title" required>
+<input type="text" name="title" class="form-control mb-2" placeholder="Title" required>
 
-        <textarea name="description" class="form-control mb-3"
-                  placeholder="Task Description"></textarea>
+<textarea name="description" class="form-control mb-2" placeholder="Description"></textarea>
 
-        <select name="priority" class="form-control mb-3">
-            <option>High</option>
-            <option>Medium</option>
-            <option>Low</option>
-        </select>
+<select name="priority" class="form-control mb-2">
+    <option>High</option>
+    <option>Medium</option>
+    <option>Low</option>
+</select>
 
-        <input type="date" name="due_date" class="form-control mb-3">
+<input type="date" name="due_date" class="form-control mb-2">
 
-        <button class="btn btn-dark">Add Task</button>
+<button class="btn btn-dark">Add Task</button>
 
-    </form>
-</div>
-
-<!-- SEARCH -->
-<input type="text" id="searchInput" class="form-control mb-4"
-       placeholder="Search Tasks...">
-
-<!-- TASKS -->
-<div class="row" id="taskContainer">
-
-{% if tasks %}
-
-    {% for task in tasks %}
-
-    <div class="col-md-4 mb-4 task-card">
-
-        <div class="card shadow-lg h-100 p-4">
-
-            <h4 class="fw-bold">{{ task.title }}</h4>
-
-            <p>{{ task.description }}</p>
-
-            <p><strong>Priority:</strong> {{ task.priority }}</p>
-
-            <p>
-                <strong>Due Date:</strong>
-                {{ task.due_date.strftime('%d-%m-%Y') if task.due_date else 'No date' }}
-            </p>
-
-            <p>
-                <strong>Status:</strong>
-
-                {% if task.status == "Completed" %}
-                    <span class="badge bg-success">Completed</span>
-                {% else %}
-                    <span class="badge bg-warning text-dark">Pending</span>
-                {% endif %}
-            </p>
-
-            {% if task.status == "Pending" %}
-            <a href="{{ url_for('complete_task', task_id=task.id) }}"
-               class="btn btn-success mb-2">
-                Complete
-            </a>
-            {% endif %}
-
-            <a href="{{ url_for('delete_task', task_id=task.id) }}"
-               class="btn btn-danger">
-                Delete
-            </a>
-
-            <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-primary mb-2">
-                Edit
-            </a>
-
-        </div>
-
-    </div>
-
-    {% endfor %}
-
-{% else %}
-    <p class="text-center text-muted">No tasks found. Add your first task!</p>
-{% endif %}
+</form>
 
 </div>
+
+<!-- TASK LIST -->
+{% for task in tasks %}
+<div class="card p-3 mb-2">
+
+    <h5>{{ task.title }}</h5>
+    <p>{{ task.description }}</p>
+    <p><b>Priority:</b> {{ task.priority }}</p>
+    <p><b>Status:</b> {{ task.status }}</p>
+
+    {% if task.status != "Completed" %}
+    <a href="/complete/{{ task.id }}" class="btn btn-success btn-sm">Complete</a>
+    {% endif %}
+
+    <a href="/edit/{{ task.id }}" class="btn btn-primary btn-sm">Edit</a>
+    <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm">Delete</a>
+
+</div>
+{% endfor %}
 
 {% endblock %}
