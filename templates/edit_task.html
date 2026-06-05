@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+<div class="col-md-6">
+
+<div class="card p-4 shadow-lg">
+
+<h3>Edit Task</h3>
+
+<form method="POST">
+
+<input class="form-control mb-3" name="title"
+value="{{ task.title }}">
+
+<textarea class="form-control mb-3" name="description">
+{{ task.description }}
+</textarea>
+
+<select class="form-control mb-3" name="priority">
+<option {{ 'selected' if task.priority=='High' }}>High</option>
+<option {{ 'selected' if task.priority=='Medium' }}>Medium</option>
+<option {{ 'selected' if task.priority=='Low' }}>Low</option>
+</select>
+
+<button class="btn btn-primary">Update Task</button>
+
+</form>
+
+</div>
+
+</div>
+</div>
+
+{% endblock %}
