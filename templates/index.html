@@ -1,25 +1,19 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Task Manager</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
 
-{% block content %}
+<div style="text-align:center; margin-top:100px;">
+    <h1>Advanced Task Manager</h1>
+    <p>Manage your daily tasks in real-time with a professional dashboard.</p>
 
-<div class="text-center hero-section">
-
-    <h1 class="display-3 fw-bold mb-4">
-        Advanced Task Manager
-    </h1>
-
-    <p class="lead mb-4">
-        Manage your daily tasks in real-time with a professional dashboard.
-    </p>
-
-    <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-3">
-        Login
+    <a href="https://github.com/Jayashree-A/Task-Management-Flask-Project">
+        View Project on GitHub
     </a>
-
-    <a href="{{ url_for('register') }}" class="btn btn-success btn-lg">
-        Register
-    </a>
-
 </div>
 
-{% endblock %}
+</body>
+</html>
